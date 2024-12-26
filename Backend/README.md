@@ -77,7 +77,6 @@ Authenticate a user using their email and password, returning a JWT token upon s
       "lastname": "string"
     },
     "email": "string",
-    "password": "string",
     "_id": "string"
   }
 }
@@ -224,3 +223,130 @@ Register a new captain account with vehicle information.
 - Vehicle plate number is required and must be at least 3 characters long
 - Vehicle capacity is required and must be at least 1
 - Vehicle type is required and must be one of: "car", "motorcycle", "auto"
+
+## Login Captain
+
+Authenticate a captain using their email and password.
+
+**HTTP:** `POST`
+
+**Endpoint:** `/captains/login`
+
+### Request Body
+
+```json
+{
+  "email": "string", // valid email format
+  "password": "string" // minimum 6 characters
+}
+```
+
+### Response
+
+#### Success (200 OK)
+
+```json
+{
+  "token": "jwt_token_string",
+  "captain": {
+    "fullname": {
+      "firstname": "string",
+      "lastname": "string"
+    },
+    "email": "string",
+    "status": "inactive",
+    "vehicle": {
+      "color": "string",
+      "plate": "string",
+      "capacity": "number",
+      "vehicleType": "string"
+    },
+    "_id": "string"
+  }
+}
+```
+
+#### Error (401 Unauthorized)
+
+```json
+{
+  "message": "Invalid email or password"
+}
+```
+
+### Validation Rules
+
+- Email is required and must be in valid email format
+- Password is required and must be at least 6 characters long
+
+## Get Captain Profile
+
+Retrieve the currently authenticated captain's profile information.
+
+**HTTP:** `GET`
+
+**Endpoint:** `/captains/profile`
+
+### Authentication
+
+Requires a valid JWT token in the Authorization headers: `Authorization: Bearer <token>`
+
+### Response
+
+#### Success (200 OK)
+
+```json
+{
+  "fullname": {
+    "firstname": "string",
+    "lastname": "string"
+  },
+  "email": "string",
+  "status": "inactive",
+  "vehicle": {
+    "color": "string",
+    "plate": "string",
+    "capacity": "number",
+    "vehicleType": "string"
+  },
+  "_id": "string"
+}
+```
+
+#### Error (401 Unauthorized)
+
+```json
+{
+  "message": "Unauthorized"
+}
+```
+
+## Logout Captain
+
+Invalidate the current captain's token and blacklist it.
+
+**HTTP:** `GET`
+
+**Endpoint:** `/captains/logout`
+
+### Authentication
+
+Requires a valid JWT token in the Authorization headers or cookie.
+
+### Response
+
+#### Success (200 OK)
+
+```json
+{
+  "message": "Logout successfully"
+}
+```
+
+#### Error (401 Unauthorized)
+
+```json
+{
+  "message": "Unauthorized"
+}
+```
