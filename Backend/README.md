@@ -34,22 +34,9 @@ Register a user by creating a new user account with provided information.
       "lastname": "string"
     },
     "email": "string",
+    "password": "string",
     "_id": "string"
   }
-}
-```
-
-#### Error (400 Bad Request)
-
-```json
-{
-  "errors": [
-    {
-      "msg": "Error message",
-      "param": "field_name",
-      "location": "body"
-    }
-  ]
 }
 ```
 
@@ -59,3 +46,52 @@ Register a user by creating a new user account with provided information.
 - Email is required and must be in valid email format
 - Password is required and must be at least 6 characters long
 - Last name is optional but if provided must be at least 3 characters long
+
+## Login User
+
+Authenticate a user using their email and password, returning a JWT token upon success.
+
+**HTTP:** `POST`
+
+**Endpoint:** `/users/login`
+
+### Request Body
+
+```json
+{
+  "email": "string", // valid email format
+  "password": "string" // minimum 6 characters
+}
+```
+
+### Response
+
+#### Success (200 OK)
+
+```json
+{
+  "token": "jwt_token_string",
+  "user": {
+    "fullname": {
+      "firstname": "string",
+      "lastname": "string"
+    },
+    "email": "string",
+    "password": "string",
+    "_id": "string"
+  }
+}
+```
+
+#### Error (401 Unauthorized)
+
+```json
+{
+  "message": "Invalid email or password"
+}
+```
+
+### Validation Rules
+
+- Email is required and must be in valid email format
+- Password is required and must be at least 6 characters long
