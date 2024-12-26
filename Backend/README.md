@@ -1,6 +1,6 @@
 # Backend User API Documentation
 
-## Description
+## Register User
 
 Register a user by creating a new user account with provided information.
 
@@ -160,3 +160,67 @@ Requires a valid JWT token in the Authorization headers or cookie.
   "message": "Unauthorized"
 }
 ```
+
+# Captain API Documentation
+
+## Register Captain
+
+Register a new captain account with vehicle information.
+
+**HTTP:** `POST`
+
+**Endpoint:** `/captains/register`
+
+### Request Body
+
+```json
+{
+  "fullname": {
+    "firstname": "string", // minimum 3 characters
+    "lastname": "string" // optional
+  },
+  "email": "string", // valid email format
+  "password": "string", // minimum 6 characters
+  "vehicle": {
+    "color": "string", // minimum 3 characters
+    "plate": "string", // minimum 3 characters
+    "capacity": "number", // minimum 1
+    "vehicleType": "string" // must be "car", "motorcycle", or "auto"
+  }
+}
+```
+
+### Response
+
+#### Success (201 Created)
+
+```json
+{
+  "token": "jwt_token_string",
+  "captain": {
+    "fullname": {
+      "firstname": "string",
+      "lastname": "string"
+    },
+    "email": "string",
+    "password": "string",
+    "vehicle": {
+      "color": "string",
+      "plate": "string",
+      "capacity": "number",
+      "vehicleType": "string"
+    },
+    "_id": "string"
+  }
+}
+```
+
+### Validation Rules
+
+- First name is required and must be at least 3 characters long
+- Email is required and must be in valid email format
+- Password is required and must be at least 6 characters long
+- Vehicle color is required and must be at least 3 characters long
+- Vehicle plate number is required and must be at least 3 characters long
+- Vehicle capacity is required and must be at least 1
+- Vehicle type is required and must be one of: "car", "motorcycle", "auto"

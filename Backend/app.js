@@ -6,7 +6,8 @@ const cookieParser = require("cookie-parser"); // Import the cookie-parser packa
 const cors = require("cors"); // Import the cors package
 const connectToDb = require("./db/db.js"); // Import the connectToDb function from the db.js file
 connectToDb();
-const userRouter = require("./routes/user.route.js"); // Import the userRouter from the user.route.js file
+const userRoutes = require("./routes/user.routes.js"); // Import the userRouter from the user.route.js file
+const captainRoutes = require("./routes/captain.routes.js"); // Import the captainRouter from the captain.route.js file
 
 app.use(cors());
 app.use(express.json());
@@ -17,6 +18,7 @@ app.get("/", (req, res) => {
   res.send("Hello World");
 });
 
-app.use("/users", userRouter);
+app.use("/users", userRoutes);
+app.use("/captains", captainRoutes);
 
 module.exports = app;
