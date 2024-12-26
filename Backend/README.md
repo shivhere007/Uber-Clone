@@ -104,13 +104,9 @@ Retrieve the currently authenticated user's profile information.
 
 **Endpoint:** `/users/profile`
 
-### Headers
+### Authentication
 
-```json
-{
-  "Authorization": "Bearer jwt_token_string"
-}
-```
+Requires a valid JWT token in the Authorization headers: `Authorization: Bearer <token>`
 
 ### Response
 
@@ -143,15 +139,9 @@ Invalidate the current user's token and blacklist the token provided in cookie o
 
 **Endpoint:** `/users/logout`
 
-### Headers
+### Authentication
 
 Requires a valid JWT token in the Authorization headers or cookie.
-
-```json
-{
-  "Authorization": "Bearer jwt_token_string"
-}
-```
 
 ### Response
 
