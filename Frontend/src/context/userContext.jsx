@@ -2,14 +2,24 @@ import React, { createContext, useState } from "react";
 
 export const UserDataContext = createContext();
 
-const userContext = ({ children }) => {
-  const [user, setUser] = useState({
-    email: "",
-    fullName: {
-      firstName: "",
-      lastName: "",
-    },
-  });
+const UserContext = ({ children }) => {
+  const [user, setUser] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(false);
+
+  const updateUser = (userData) => {
+    setUser(userData);
+  };
+
+  const value = {
+    user,
+    setUser,
+    isLoading,
+    setIsLoading,
+    error,
+    setError,
+    updateUser,
+  };
 
   return (
     <div>
@@ -20,4 +30,4 @@ const userContext = ({ children }) => {
   );
 };
 
-export default userContext;
+export default UserContext;
