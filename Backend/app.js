@@ -8,6 +8,8 @@ const connectToDb = require("./db/db.js"); // Import the connectToDb function fr
 connectToDb();
 const userRoutes = require("./routes/user.routes.js"); // Import the userRouter from the user.route.js file
 const captainRoutes = require("./routes/captain.routes.js"); // Import the captainRouter from the captain.route.js file
+const mapsRoutes = require("./routes/maps.routes.js");
+const rideRoutes = require("./routes/ride.routes.js");
 
 app.use(cors());
 app.use(express.json());
@@ -20,5 +22,7 @@ app.get("/", (req, res) => {
 
 app.use("/users", userRoutes);
 app.use("/captains", captainRoutes);
+app.use("/maps", mapsRoutes);
+app.use("/rides", rideRoutes);
 
 module.exports = app;
